@@ -220,7 +220,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=560
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.hwc.mdpcomp.enable=true
+    persist.hwc.mdpcomp.enable=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
