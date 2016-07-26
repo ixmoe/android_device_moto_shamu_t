@@ -31,6 +31,7 @@ system/bin/qseecomd:qcom
 system/bin/radish:qcom
 system/bin/ramdump:moto
 system/bin/sensors.qcom:qcom
+/system/bin/stm401:qcom
 system/bin/tcmd_mini:moto
 system/bin/test_diag:qcom
 system/bin/thermal-engine:qcom
@@ -139,6 +140,10 @@ system/vendor/firmware/right.boost_n1c2.patch:moto
 system/vendor/firmware/right.boost_ringtone_table.preset:moto
 system/vendor/firmware/right.boost.speaker:moto
 system/vendor/firmware/right.boost_voice_table.preset:moto
+system/vendor/firmware/sensorhubfw.bin:moto
+system/vendor/firmware/sensorhubfw_p1.bin:moto
+system/vendor/firmware/sensorhubver_p1.txt:moto
+system/vendor/firmware/sensorhubver.txt:moto
 system/vendor/firmware/venus.b00:qcom
 system/vendor/firmware/venus.b01:qcom
 system/vendor/firmware/venus.b02:qcom
@@ -160,6 +165,7 @@ system/vendor/lib/egl/libq3dtools_adreno.so:qcom
 system/vendor/lib/hw/activity_recognition.msm8084.so:qcom
 system/vendor/lib/hw/flp.msm8084.so:qcom
 system/vendor/lib/hw/sensors.msm8084.so:qcom
+system/vendor/lib/hw/sensorhub.msm8084.so:qcom
 system/vendor/lib/libacdbloader.so:qcom
 system/vendor/lib/libacdbrtac.so:qcom
 system/vendor/lib/libactuator_lc898122_camcorder.so:qcom
