@@ -47,6 +47,7 @@
 /system/bin/radish
 /system/bin/ramdump
 /system/bin/sensors.qcom
+/system/bin/stm401
 /system/bin/tcmd_mini
 /system/bin/test_diag
 /system/bin/thermal-engine
@@ -155,6 +156,10 @@
 /system/vendor/firmware/right.boost.speaker
 /system/vendor/firmware/right.boost.voice.eq
 /system/vendor/firmware/right.boost_voice_table.preset
+/system/vendor/firmware/sensorhubfw.bin
+/system/vendor/firmware/sensorhubfw_p1.bin
+/system/vendor/firmware/sensorhubver_p1.txt
+/system/vendor/firmware/sensorhubver.txt
 /system/vendor/firmware/venus.b00
 /system/vendor/firmware/venus.b01
 /system/vendor/firmware/venus.b02
@@ -176,6 +181,7 @@
 /system/vendor/lib/hw/activity_recognition.msm8084.so
 /system/vendor/lib/hw/flp.msm8084.so
 /system/vendor/lib/hw/sensors.msm8084.so
+/system/vendor/lib/hw/sensorhub.msm8084.so
 /system/vendor/lib/libacdbloader.so
 /system/vendor/lib/libacdbrtac.so
 /system/vendor/lib/libactuator_lc898122_camcorder.so
