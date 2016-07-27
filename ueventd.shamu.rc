@@ -54,8 +54,23 @@
 /dev/jpeg0                0660   system     camera
 /dev/jpeg1                0660   system     camera
 /dev/jpeg2                0660   system     camera
+/dev/msm_camera/*         0660   system     camera
+/dev/gemini/              0660   system     camera
+/dev/mercury0             0660   system     camera
+/dev/msm_vidc_reg         0660   system     audio
+/dev/msm_vidc_dec         0660   system     audio
+/dev/msm_vidc_dec_sec     0660   system     audio
+/dev/msm_vidc_enc         0660   system     audio
+/dev/msm_rotator          0660   system     system
+/dev/hw_random            0600   root       root
+/dev/adsprpc-smd          0660   media      camera
 /dev/ttyHS99              0660   bluetooth  net_bt_stack
 /sys/devices/virtual/smdpkt/smdcntl*       open_timeout   0664 radio radio
+/dev/sdio_tty_ciq_00      0660   system     system
+/dev/tty_sdio_00          0660   system     system
+/dev/ttyGS0               0660   system     system
+/dev/i2c-5                0660   media       media
+/dev/voice_svc            0660   system     audio
 
 #SAR device
 /sys/devices/mmi_sar_ctrl.*                         sar_wifi       0220    radio    radio
@@ -63,3 +78,68 @@
 /dev/subsys_esoc*         0640   system     radio
 
 /dev/block/platform/msm_sdcc.1/by-name/frp 0600 system system
+
+# sensors
+/sys/devices/i2c-12/12-*  pollrate_ms 0664 system system
+/sys/devices/f9925000.i2c/i2c-0/0-* enable          0660     input     system
+/sys/devices/f9925000.i2c/i2c-0/0-* poll_delay      0660     input     system
+/sys/devices/virtual/optical_sensors/proximity      ps_adc         0660    input    system
+/sys/devices/virtual/optical_sensors/proximity      ps_poll_delay  0660    input    system
+/sys/devices/virtual/optical_sensors/lightsensor    ls_auto        0660    input    system
+/sys/devices/virtual/optical_sensors/lightsensor    ls_poll_delay  0660    input    system
+/sys/devices/virtual/input/input*                   poll           0660    input    system
+/sys/devices/virtual/input/input*                   pollrate_ms    0660    input    system
+/sys/devices/virtual/input/input*                   delay          0660    root     input
+/sys/devices/virtual/input/input*                   op_mode        0660    root     input
+/sys/devices/virtual/input/input*                   offset_x       0664    root     input
+/sys/devices/virtual/input/input*                   offset_y       0664    root     input
+/sys/devices/virtual/input/input*                   offset_z       0664    root     input
+/sys/devices/virtual/input/input*                   rept_xy        0664    root     input
+/sys/devices/virtual/input/input*                   rept_z         0664    root     input
+/sys/devices/virtual/input/input*                   bandwidth      0664    root     input
+/sys/devices/virtual/input/input*                   range          0664    root     input
+/sys/devices/virtual/input/input*                   driver/enable  0660    root     input
+/sys/devices/virtual/input/input*                   driver/delay   0660    root     input
+/sys/devices/virtual/stm401/stm401_as*              timestamp_time_ns      0440 compass compass
+/sys/devices/virtual/stm401/stm401_as*              rv_6axis_update_rate   0660 compass compass
+/sys/devices/virtual/stm401/stm401_as*              rv_9axis_update_rate   0660 compass compass
+
+# UIO devices
+/dev/uio0                 0660   system     system
+/dev/uio1                 0660   system     system
+/dev/uio2                 0660   system     system
+
+# ESOC devices
+/dev/subsys_esoc*         0640   system     radio
+
+# Moto Sensors
+/dev/stm401               0660   system     compass
+/dev/stm401_as            0660   compass    compass
+/dev/stm401_ms            0660   compass    compass
+
+# SSR
+/dev/coredump_modem       0660   radio      radio
+/dev/ramdump_adsp         0660   radio      radio
+/dev/ramdump_modem        0660   radio      radio
+/dev/ramdump_smem-modem   0660   radio      radio
+/dev/ramdump_smem-smd     0660   radio      radio
+/dev/ramdump_venus        0660   radio      radio
+/dev/ramdump_pronto       0660   radio      radio
+
+# ACDB
+/dev/msm_acdb             0660   system     audio
+
+# I2C
+/dev/i2c-*                0660   root       system
+# Validity Sensor
+/dev/vfsspi               0660   fingerp    fingerp
+
+# SECURITY
+/dev/qseecom              0660   system     drmrpc
+/dev/sec                  0660   system     drmrpc
+
+# haptic
+/dev/drv2605              0660   system     system
+
+# FB Quickdraw
+/dev/fb_quickdraw         0660  system     graphics
