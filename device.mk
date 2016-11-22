@@ -26,7 +26,9 @@ PRODUCT_COPY_FILES += \
     device/moto/shamu_t/init.shamu.power.rc:root/init.shamu.power.rc \
     device/moto/shamu_t/init.shamu.usb.rc:root/init.shamu.usb.rc \
     device/moto/shamu_t/fstab.shamu:root/fstab.shamu \
-    device/moto/shamu_t/ueventd.shamu.rc:root/ueventd.shamu.rc
+    device/moto/shamu_t/ueventd.shamu.rc:root/ueventd.shamu.rc \
+    device/moto/shamu_t/rootdir/etc/init.qcom.devwait.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devwait.sh \
+    device/moto/shamu_t/rootdir/etc/init.qcom.devstart.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devstart.sh
 
 # Input device files for shamu
 PRODUCT_COPY_FILES += \
