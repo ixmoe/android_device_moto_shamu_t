@@ -426,3 +426,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Treble packages
 $(call inherit-product, device/moto/shamu_t/treble.mk)
+
+PRODUCT_ENFORCE_RRO_TARGETS := \
+    framework-res
+
