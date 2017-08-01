@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     package="com.cyanogenmod.settings.device"
-    coreApp="true"
-    android:sharedUserId="android.uid.system" >
+    android:sharedUserId="android.uid.system"
+    >
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <uses-sdk
-        android:minSdkVersion="21" />
+    <protected-broadcast android:name="com.android.systemui.doze.pulse" />
 
     <application
         android:allowBackup="true"
-        android:hardwareAccelerated="true"
-        android:label="CMActions"
-        android:persistent="true"
-        android:restoreAnyVersion="true"
-        android:supportsRtl="true"
-        android:theme="@android:style/Theme.Material.Settings" >
+        android:label="@string/device_settings_app_name"
+        android:persistent="true" >
 
         <receiver android:name="com.cyanogenmod.settings.device.BootCompletedReceiver">
             <intent-filter>
@@ -36,20 +31,9 @@
         </service>
 
         <activity
-                  android:excludeFromRecents="true"
-                  android:name="CMActions"
-                  android:label="CMActions"
-                  android:launchMode="singleInstance"
-                  android:screenOrientation="portrait"
-                  android:windowAnimationStyle="@null">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".TouchscreenGestureSettings"
-            android:label="@string/screen_gestures_panel_title">
+            android:name=".TouchscreenGesturePreferenceActivity"
+            android:label="@string/screen_gestures_panel_title"
+            android:theme="@style/CMActions" >
             <intent-filter>
                 <action android:name="com.android.settings.action.EXTRA_SETTINGS" />
             </intent-filter>
