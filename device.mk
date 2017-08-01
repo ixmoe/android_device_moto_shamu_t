@@ -21,31 +21,31 @@
 
 
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/init.shamu.rc:root/init.shamu.rc \
-    device/moto/shamu/init.shamu.power.rc:root/init.shamu.power.rc \
-    device/moto/shamu/init.shamu.usb.rc:root/init.shamu.usb.rc \
-    device/moto/shamu/fstab.shamu:root/fstab.shamu \
-    device/moto/shamu/ueventd.shamu.rc:root/ueventd.shamu.rc
+    device/moto/shamu_t/init.shamu.rc:root/init.shamu.rc \
+    device/moto/shamu_t/init.shamu.power.rc:root/init.shamu.power.rc \
+    device/moto/shamu_t/init.shamu.usb.rc:root/init.shamu.usb.rc \
+    device/moto/shamu_t/fstab.shamu:root/fstab.shamu \
+    device/moto/shamu_t/ueventd.shamu.rc:root/ueventd.shamu.rc
 
 # Input device files for shamu
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-    device/moto/shamu/apq8084-taiko-tfa9890_stereo_co_Button_Jack.kl:system/usr/keylayout/apq8084-taiko-tfa9890_stereo_co_Button_Jack.kl \
-    device/moto/shamu/sensorprocessor.kl:system/usr/keylayout/sensorprocessor.kl \
-    device/moto/shamu/atmel_mxt_ts.idc:system/usr/idc/atmel_mxt_ts.idc
+    device/moto/shamu_t/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    device/moto/shamu_t/apq8084-taiko-tfa9890_stereo_co_Button_Jack.kl:system/usr/keylayout/apq8084-taiko-tfa9890_stereo_co_Button_Jack.kl \
+    device/moto/shamu_t/sensorprocessor.kl:system/usr/keylayout/sensorprocessor.kl \
+    device/moto/shamu_t/atmel_mxt_ts.idc:system/usr/idc/atmel_mxt_ts.idc
 
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/audio_policy.conf:system/etc/audio_policy.conf \
-    device/moto/shamu/audio_effects.conf:system/vendor/etc/audio_effects.conf
+    device/moto/shamu_t/audio_policy.conf:system/etc/audio_policy.conf \
+    device/moto/shamu_t/audio_effects.conf:system/vendor/etc/audio_effects.conf
 
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/media_profiles.xml:system/etc/media_profiles.xml \
-    device/moto/shamu/media_codecs.xml:system/etc/media_codecs.xml \
-    device/moto/shamu/media_codecs_performance.xml:system/etc/media_codecs_performance.xml
+    device/moto/shamu_t/media_profiles.xml:system/etc/media_profiles.xml \
+    device/moto/shamu_t/media_codecs.xml:system/etc/media_codecs.xml \
+    device/moto/shamu_t/media_codecs_performance.xml:system/etc/media_codecs_performance.xml
 
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/mixer_paths.xml:system/etc/mixer_paths.xml \
-    device/moto/shamu/audio_platform_info.xml:system/etc/audio_platform_info.xml
+    device/moto/shamu_t/mixer_paths.xml:system/etc/mixer_paths.xml \
+    device/moto/shamu_t/audio_platform_info.xml:system/etc/audio_platform_info.xml
 
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
@@ -83,7 +83,7 @@ PRODUCT_COPY_FILES += \
 
 # For GPS
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/sec_config:system/etc/sec_config
+    device/moto/shamu_t/sec_config:system/etc/sec_config
 
 # Touch firmware updater
 PRODUCT_COPY_FILES += \
@@ -94,15 +94,15 @@ $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4356
 
 # WiFi cal NVRAM file
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
+    device/moto/shamu_t/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
 
 # BT FW
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/bluetooth/BCM4356A2_001.003.015.0077.0214_ORC.hcd:$(TARGET_COPY_OUT_VENDOR)/firmware/bcm4354A2.hcd
+    device/moto/shamu_t/bluetooth/BCM4356A2_001.003.015.0077.0214_ORC.hcd:$(TARGET_COPY_OUT_VENDOR)/firmware/bcm4354A2.hcd
 
 # For SPN display
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/spn-conf.xml:system/etc/spn-conf.xml
+    device/moto/shamu_t/spn-conf.xml:system/etc/spn-conf.xml
 
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := 560dpi
@@ -112,7 +112,7 @@ PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
 PRODUCT_CHARACTERISTICS := nosdcard
 
 DEVICE_PACKAGE_OVERLAYS := \
-    device/moto/shamu/overlay
+    device/moto/shamu_t/overlay
 
 PRODUCT_PACKAGES := \
     libwpa_client \
@@ -303,7 +303,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # GPS configuration
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/gps.conf:system/etc/gps.conf
+    device/moto/shamu_t/gps.conf:system/etc/gps.conf
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -331,12 +331,12 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
     frameworks/native/data/etc/android.hardware.nfc.hcef.xml:system/etc/permissions/android.hardware.nfc.hcef.xml \
-    device/moto/shamu/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
-    device/moto/shamu/nfc/libnfc-brcm-20795a10.conf:system/etc/libnfc-brcm-20795a10.conf
+    device/moto/shamu_t/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
+    device/moto/shamu_t/nfc/libnfc-brcm-20795a10.conf:system/etc/libnfc-brcm-20795a10.conf
 
 # NFCEE access control
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/nfcee_access.xml:system/etc/nfcee_access.xml
+    device/moto/shamu_t/nfcee_access.xml:system/etc/nfcee_access.xml
 
 # Modem debugger
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
@@ -350,10 +350,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.qc.sub.rdump.on=0
 
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/init.shamu.diag.rc.userdebug:root/init.shamu.diag.rc
+    device/moto/shamu_t/init.shamu.diag.rc.userdebug:root/init.shamu.diag.rc
 else
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/init.shamu.diag.rc.user:root/init.shamu.diag.rc
+    device/moto/shamu_t/init.shamu.diag.rc.user:root/init.shamu.diag.rc
 endif
 
 # Enable for volte call
@@ -416,7 +416,7 @@ PRODUCT_OEM_PROPERTIES := \
 
 # Copy the qcril.db file from qcril to system. Useful to get the radio tech family for the camped operator
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/qcril.db:system/etc/ril/qcril.db
+    device/moto/shamu_t/qcril.db:system/etc/ril/qcril.db
 
 # Reduce client buffer size for fast audio output tracks
 PRODUCT_PROPERTY_OVERRIDES += \
