@@ -6,18 +6,18 @@ TARGET_SCREEN_WIDTH := 1440
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Inherit device configuration
-$(call inherit-product, device/moto/shamu/aosp_shamu.mk)
+$(call inherit-product, device/moto/shamu_t/aosp_shamu.mk)
 
-DEVICE_PACKAGE_OVERLAYS += device/moto/shamu/overlay-cm
+DEVICE_PACKAGE_OVERLAYS += device/moto/shamu_t/overlay-cm
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_NAME := lineage_shamu
-PRODUCT_BRAND := google
-PRODUCT_MODEL := Nexus 6
+PRODUCT_NAME := lineage_shamu_t
+PRODUCT_BRAND := motorola
+PRODUCT_MODEL := Moto X Pro
 
-TARGET_VENDOR := moto
+TARGET_VENDOR := motorola
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME=shamu \
-    BUILD_FINGERPRINT=google/shamu/shamu:7.1.1/NGI55D/4298276:user/release-keys \
-    PRIVATE_BUILD_DESC="shamu-user 7.1.1 NGI55D 4298276 release-keys"
+    PRODUCT_NAME=shamu_t \
+    BUILD_FINGERPRINT=google/shamu_t/shamu_t:7.1.1/NGI55D/4298276:user/release-keys \
+    PRIVATE_BUILD_DESC="shamu_t-user 7.1.1 NGI55D 4298276 release-keys"
