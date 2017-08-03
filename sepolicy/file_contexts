@@ -85,6 +85,11 @@
 /dev/socket/sensor_ctl_socket   u:object_r:sensors_socket:s0
 /dev/socket/mpdecision(/.*)?    u:object_r:mpdecision_socket:s0
 
+# STM401
+/dev/stm401                             u:object_r:sensors_device:s0
+/dev/stm401_as                          u:object_r:sensors_device:s0
+/dev/stm401_ms                          u:object_r:sensors_device:s0
+
 #Add context for IMS Socket node
 /dev/socket/ims_qmid            u:object_r:ims_socket:s0
 /dev/socket/ims_datad           u:object_r:ims_socket:s0
