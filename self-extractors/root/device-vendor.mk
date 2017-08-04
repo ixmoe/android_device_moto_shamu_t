@@ -15,7 +15,7 @@
 PRODUCT_PACKAGES += \
     BuaContactAdapter
 
-LOCAL_STEM := shamu/device-partial.mk
+LOCAL_STEM := shamu_t/device-partial.mk
 
 $(call inherit-product-if-exists, vendor/broadcom/$(LOCAL_STEM))
 $(call inherit-product-if-exists, vendor/moto/$(LOCAL_STEM))
