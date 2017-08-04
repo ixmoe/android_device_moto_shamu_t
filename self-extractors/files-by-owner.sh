@@ -81,9 +81,9 @@ if test $file != ZZZ
 then
   if [[ $file == */lib64/* ]]
   then
-    echo "    vendor/$target_owner/shamu/proprietary/lib64/$(basename $file):$file:$target_owner \\" >> $target_owner/staging/device-partial.mk
+    echo "    vendor/$target_owner/shamu_t/proprietary/lib64/$(basename $file):$file:$target_owner \\" >> $target_owner/staging/device-partial.mk
   else
-    echo "    vendor/$target_owner/shamu/proprietary/$(basename $file):$file:$target_owner \\" >> $target_owner/staging/device-partial.mk
+    echo "    vendor/$target_owner/shamu_t/proprietary/$(basename $file):$file:$target_owner \\" >> $target_owner/staging/device-partial.mk
   fi
 fi
 echo "            $file \\" >> extract-lists.txt

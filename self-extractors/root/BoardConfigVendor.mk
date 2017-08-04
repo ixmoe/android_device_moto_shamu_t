@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_STEM := shamu/BoardConfigPartial.mk
+LOCAL_STEM := shamu_t/BoardConfigPartial.mk
 
 -include vendor/broadcom/$(LOCAL_STEM)
 -include vendor/moto/$(LOCAL_STEM)
