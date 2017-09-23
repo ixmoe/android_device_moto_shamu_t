@@ -224,20 +224,6 @@ PRODUCT_COPY_FILES += \
     device/moto/shamu_t/nfc/libnfc-brcm.conf:system/vendor/etc/libnfc-brcm.conf \
     device/moto/shamu_t/nfc/libnfc-brcm-20795a10.conf:system/vendor/etc/libnfc-brcm-20795a10.conf
 
-# Modem debugger
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-ifeq (,$(filter aosp_shamu, $(TARGET_PRODUCT)))
-PRODUCT_PACKAGES += \
-    QXDMLoggerV2
-endif # aosp_shamu
-
-PRODUCT_COPY_FILES += \
-    device/moto/shamu_t/init.shamu.diag.rc.userdebug:root/init.shamu.diag.rc
-else
-PRODUCT_COPY_FILES += \
-    device/moto/shamu_t/init.shamu.diag.rc.user:root/init.shamu.diag.rc
-endif
-
 # Enable for volte call
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 
