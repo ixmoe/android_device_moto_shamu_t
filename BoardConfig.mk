@@ -88,6 +88,7 @@ TARGET_BOARD_INFO_FILE := device/moto/shamu_t/board-info.txt
 TARGET_SYSTEM_PROP += device/moto/shamu_t/system.prop
 
 TARGET_USES_ION := true
+TARGET_USES_64_BIT_BINDER := true
 TARGET_HW_DISK_ENCRYPTION := false
 
 TARGET_TOUCHBOOST_FREQUENCY := 1500
