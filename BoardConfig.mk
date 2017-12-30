@@ -131,8 +131,15 @@ USE_CLANG_PLATFORM_BUILD := true
 
 TARGET_FS_CONFIG_GEN += device/moto/shamu_t/config.fs
 
-# Disable dex-preopt of prebuilts to save space.
-DONT_DEXPREOPT_PREBUILTS := true
+# Dexpreopt
+ifeq ($(HOST_OS),linux)
+  ifneq ($(TARGET_BUILD_VARIANT),eng)
+    ifeq ($(WITH_DEXPREOPT),)
+      WITH_DEXPREOPT := true
+      WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
+    endif
+  endif
+endif
 
 # Render
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
