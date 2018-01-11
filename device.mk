@@ -48,7 +48,7 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:system/etc/default_volume_tables.xml
 
 PRODUCT_COPY_FILES += \
-    device/moto/shamu_t/media_profiles.xml:system/etc/media_profiles.xml \
+    device/moto/shamu_t/media_profiles_V1_0.xml:system/vendor/etc/media_profiles_V1_0.xml \
     device/moto/shamu_t/media_codecs.xml:system/etc/media_codecs.xml \
     device/moto/shamu_t/media_codecs_performance.xml:system/etc/media_codecs_performance.xml
 
@@ -415,10 +415,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.voicecomm=false \
     persist.audio.fluence.voicerec=false \
     persist.audio.fluence.speaker=false
-
-# Media
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.media.treble_omx=false
 
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
