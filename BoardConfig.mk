@@ -145,6 +145,6 @@ BOARD_HARDWARE_CLASS += $(PLATFORM_PATH)/lineagehw
 LZMA_RAMDISK_TARGETS := recovery
 
 # Device manifest
-DEVICE_MANIFEST_FILE := device/moto/shamu/manifest.xml
+DEVICE_MANIFEST_FILE := device/moto/shamu_t/manifest.xml
 
--include vendor/motorola/shamu/BoardConfigVendor.mk
+-include vendor/motorola/shamu_t/BoardConfigVendor.mk

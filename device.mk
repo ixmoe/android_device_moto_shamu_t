@@ -36,12 +36,12 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-    device/moto/shamu/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
-    device/moto/shamu/audio/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
-    device/moto/shamu/audio/audio_policy_volumes_drc.xml:system/etc/audio_policy_volumes_drc.xml \
-    device/moto/shamu/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
-    device/moto/shamu/audio/motvr_audio_policy_configuration.xml:system/etc/motvr_audio_policy_configuration.xml \
+    device/moto/shamu_t/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+    device/moto/shamu_t/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
+    device/moto/shamu_t/audio/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
+    device/moto/shamu_t/audio/audio_policy_volumes_drc.xml:system/etc/audio_policy_volumes_drc.xml \
+    device/moto/shamu_t/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
+    device/moto/shamu_t/audio/motvr_audio_policy_configuration.xml:system/etc/motvr_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:system/etc/a2dp_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:system/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:system/etc/usb_audio_policy_configuration.xml \
@@ -322,8 +322,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
     frameworks/native/data/etc/android.hardware.nfc.hcef.xml:system/etc/permissions/android.hardware.nfc.hcef.xml \
-    device/moto/shamu/nfc/libnfc-brcm.conf:system/vendor/etc/libnfc-brcm.conf \
-    device/moto/shamu/nfc/libnfc-brcm-20795a10.conf:system/vendor/etc/libnfc-brcm-20795a10.conf
+    device/moto/shamu_t/nfc/libnfc-brcm.conf:system/vendor/etc/libnfc-brcm.conf \
+    device/moto/shamu_t/nfc/libnfc-brcm-20795a10.conf:system/vendor/etc/libnfc-brcm-20795a10.conf
 
 # NFCEE access control
 PRODUCT_COPY_FILES += \
@@ -430,4 +430,4 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
 
 # Treble packages
-$(call inherit-product, device/moto/shamu/treble.mk)
+$(call inherit-product, device/moto/shamu_t/treble.mk)
