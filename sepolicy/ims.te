@@ -44,6 +44,7 @@ allow ims shell_exec:file rx_file_perms;
 
 # Runs /system/bin/ndc
 allow ims system_file:file rx_file_perms;
+allow ims vendor_file_type:file rx_file_perms;
 
 # XXX Run toolbox.  Might not be needed.
 allow ims toolbox_exec:file rx_file_perms;
@@ -59,4 +60,4 @@ allow ims wpa_socket:dir rw_dir_perms;
 
 allow ims wifi_data_file:dir r_dir_perms;
 
-unix_socket_send(ims, wpa, wpa)
+unix_socket_send(ims, wpa, hal_wifi_supplicant_server)

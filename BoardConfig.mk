@@ -72,12 +72,8 @@ WIFI_BUS := PCIE
 
 #Bluetooth defines
 BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_CUSTOM_BT_CONFIG := hardware/broadcom/libbt/include/vnd_shamu.txt
-ifeq ($(TARGET_PRODUCT),bt_shamu)
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/moto/shamu_t/bluetooth_extra
-else
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/moto/shamu_t/bluetooth
-endif
+BOARD_CUSTOM_BT_CONFIG := device/moto/shamu_t/bluetooth/vnd_shamu.txt
 
 TARGET_NO_RADIOIMAGE := true
 TARGET_BOARD_PLATFORM := msm8084
@@ -86,10 +82,8 @@ TARGET_NO_RPC := true
 
 TARGET_BOARD_INFO_FILE := device/moto/shamu_t/board-info.txt
 
-USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
 TARGET_HW_DISK_ENCRYPTION := false
-TARGET_CRYPTFS_HW_PATH := device/moto/shamu_t/cryptfs_hw
 
 TARGET_TOUCHBOOST_FREQUENCY := 1500
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -102,8 +96,11 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072
 
+# Charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
+BOARD_HAL_STATIC_LIBRARIES := libhealthd.shamu
 BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
+WITH_LINEAGE_CHARGER := false
 
 TARGET_RECOVERY_FSTAB = device/moto/shamu_t/fstab.shamu
 # Ensure f2fstools are built
@@ -118,7 +115,6 @@ BOARD_SEPOLICY_DIRS += device/moto/shamu_t/sepolicy
 
 HAVE_ADRENO_SOURCE:= false
 
-OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
@@ -128,7 +124,7 @@ BOARD_HAS_AUDIO_DSP := true
 
 USE_DEVICE_SPECIFIC_CAMERA:= true
 
-BOARD_HAL_STATIC_LIBRARIES := libdumpstate.shamu
+BOARD_HAL_STATIC_LIBRARIES += libdumpstate.shamu
 
 USE_CLANG_PLATFORM_BUILD := true
 
@@ -137,12 +133,18 @@ TARGET_FS_CONFIG_GEN += device/moto/shamu_t/config.fs
 # Disable dex-preopt of prebuilts to save space.
 DONT_DEXPREOPT_PREBUILTS := true
 
-# CMHW
-BOARD_USES_CYANOGEN_HARDWARE := true
-BOARD_HARDWARE_CLASS := \
-    hardware/cyanogen/cmhw
+# Render
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
+USE_OPENGL_RENDERER := true
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+
+# Lineage Hardware
+BOARD_HARDWARE_CLASS += $(PLATFORM_PATH)/lineagehw
 
 # Recovery
 LZMA_RAMDISK_TARGETS := recovery
+
+# Device manifest
+DEVICE_MANIFEST_FILE := device/moto/shamu/manifest.xml
 
 -include vendor/motorola/shamu/BoardConfigVendor.mk

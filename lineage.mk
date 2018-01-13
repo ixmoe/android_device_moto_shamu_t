@@ -8,7 +8,7 @@ $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 # Inherit device configuration
 $(call inherit-product, device/moto/shamu_t/aosp_shamu.mk)
 
-DEVICE_PACKAGE_OVERLAYS += device/moto/shamu_t/overlay-cm
+DEVICE_PACKAGE_OVERLAYS += device/moto/shamu/overlay-lineage
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_NAME := lineage_shamu_t
@@ -19,5 +19,5 @@ TARGET_VENDOR := motorola
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=shamu_t \
-    BUILD_FINGERPRINT=google/shamu_t/shamu_t:7.1.1/NGI55D/4298276:user/release-keys \
-    PRIVATE_BUILD_DESC="shamu_t-user 7.1.1 NGI55D 4298276 release-keys"
+    BUILD_FINGERPRINT=google/shamu/shamu:7.1.1/N6F27M/4299435:user/release-keys \
+    PRIVATE_BUILD_DESC="shamu-user 7.1.1 N6F27M 4299435 release-keys"

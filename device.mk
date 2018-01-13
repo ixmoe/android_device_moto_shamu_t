@@ -34,18 +34,23 @@ PRODUCT_COPY_FILES += \
     device/moto/shamu_t/sensorprocessor.kl:system/usr/keylayout/sensorprocessor.kl \
     device/moto/shamu_t/atmel_mxt_ts.idc:system/usr/idc/atmel_mxt_ts.idc
 
+# Audio
 PRODUCT_COPY_FILES += \
-    device/moto/shamu_t/audio_policy.conf:system/etc/audio_policy.conf \
-    device/moto/shamu_t/audio_effects.conf:system/vendor/etc/audio_effects.conf
+    device/moto/shamu/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+    device/moto/shamu/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
+    device/moto/shamu/audio/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
+    device/moto/shamu/audio/audio_policy_volumes_drc.xml:system/etc/audio_policy_volumes_drc.xml \
+    device/moto/shamu/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
+    device/moto/shamu/audio/motvr_audio_policy_configuration.xml:system/etc/motvr_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:system/etc/a2dp_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:system/etc/r_submix_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:system/etc/usb_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:system/etc/default_volume_tables.xml
 
 PRODUCT_COPY_FILES += \
     device/moto/shamu_t/media_profiles.xml:system/etc/media_profiles.xml \
     device/moto/shamu_t/media_codecs.xml:system/etc/media_codecs.xml \
     device/moto/shamu_t/media_codecs_performance.xml:system/etc/media_codecs_performance.xml
-
-PRODUCT_COPY_FILES += \
-    device/moto/shamu_t/mixer_paths.xml:system/etc/mixer_paths.xml \
-    device/moto/shamu_t/audio_platform_info.xml:system/etc/audio_platform_info.xml
 
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
@@ -118,8 +123,13 @@ PRODUCT_PACKAGES := \
     libwpa_client \
     hostapd \
     wificond \
+    wifilogd \
     wpa_supplicant \
     wpa_supplicant.conf
+
+# Bluetooth
+PRODUCT_PACKAGES += \
+    libbt-vendor
 
 PRODUCT_PACKAGES += atmel.fw.apq8084
 
@@ -131,6 +141,7 @@ PRODUCT_PACKAGES += \
     gralloc.msm8084 \
     hwcomposer.msm8084 \
     memtrack.msm8084 \
+    libgenlock \
     libqdutils \
     libqdMetaData
 
@@ -143,6 +154,8 @@ PRODUCT_PACKAGES += \
     libOmxVdecHevc \
     libOmxVenc
 
+# Audio
+USE_XML_AUDIO_POLICY_CONF := 1
 PRODUCT_PACKAGES += \
     audio.primary.msm8084 \
     audio.a2dp.default \
@@ -166,15 +179,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Audio effects
 PRODUCT_PACKAGES += \
+    libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libqcomvoiceprocessingdescriptors
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    fmas.spkr_6ch=35,20,110 \
-    fmas.spkr_2ch=35,25 \
-    fmas.spkr_angles=10 \
-    fmas.spkr_sgain=0
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -191,13 +199,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     libion
-
-PRODUCT_PACKAGES += \
-    lights.shamu
-
-# for launcher layout
-#PRODUCT_PACKAGES += \
-#    ShamuLayout
 
 PRODUCT_PACKAGES += \
     bdAddrLoader
@@ -308,18 +309,7 @@ PRODUCT_COPY_FILES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    libloc_adapter \
-    libloc_eng \
-    libloc_api_v02 \
-    libloc_ds_api \
-    libloc_core \
-    libizat_core \
-    libgeofence \
-    libgps.utils \
-    gps.msm8084 \
-    flp.msm8084 \
-    liblbs_core \
-    flp.conf
+    gps.msm8084
 
 # NFC packages
 PRODUCT_PACKAGES += \
@@ -332,8 +322,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
     frameworks/native/data/etc/android.hardware.nfc.hcef.xml:system/etc/permissions/android.hardware.nfc.hcef.xml \
-    device/moto/shamu_t/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
-    device/moto/shamu_t/nfc/libnfc-brcm-20795a10.conf:system/etc/libnfc-brcm-20795a10.conf
+    device/moto/shamu/nfc/libnfc-brcm.conf:system/vendor/etc/libnfc-brcm.conf \
+    device/moto/shamu/nfc/libnfc-brcm-20795a10.conf:system/vendor/etc/libnfc-brcm-20795a10.conf
 
 # NFCEE access control
 PRODUCT_COPY_FILES += \
@@ -359,17 +349,6 @@ endif
 
 # Enable for volte call
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
-
-# In userdebug, add minidebug info the the boot image and the system server to support
-# diagnosing native crashes.
-ifneq (,$(filter userdebug, $(TARGET_BUILD_VARIANT)))
-    # Boot image.
-    PRODUCT_DEX_PREOPT_BOOT_FLAGS += --generate-mini-debug-info
-    # System server and some of its services.
-    # Note: we cannot use PRODUCT_SYSTEM_SERVER_JARS, as it has not been expanded at this point.
-    $(call add-product-dex-preopt-module-config,services,--generate-mini-debug-info)
-    $(call add-product-dex-preopt-module-config,wifi-service,--generate-mini-debug-info)
-endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
    dalvik.vm.heapgrowthlimit=256m
@@ -427,6 +406,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     audio_hal.period_size=192
 
+# low audio flinger standby delay to reduce power consumption
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.audio.flinger_standbytime_ms=300
+
 # Set correct voice call audio property values
 PRODUCT_PROPERTY_OVERRIDES += \
     media.aac_51_output_enabled=true \
@@ -438,6 +421,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.voicerec=false \
     persist.audio.fluence.speaker=false
 
+# Media
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.media.treble_omx=false
+
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
+
+# Treble packages
+$(call inherit-product, device/moto/shamu/treble.mk)
