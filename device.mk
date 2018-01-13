@@ -203,11 +203,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     bdAddrLoader
 
-# CMActions
-PRODUCT_PACKAGES += \
-    libjni_CMActions \
-    CMActions
-    
 PRODUCT_PACKAGES += \
     keystore.msm8084
 
