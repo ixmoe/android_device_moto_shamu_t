@@ -277,10 +277,6 @@ PRODUCT_OEM_PROPERTIES := \
 PRODUCT_COPY_FILES += \
     device/moto/shamu_t/qcril.db:system/etc/ril/qcril.db
 
-# Media
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.media.treble_omx=false
-
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
