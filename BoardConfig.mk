@@ -1,5 +1,6 @@
 #
 # Copyright (C) 2014 The Android Open-Source Project
+# Copyright (C) 2018 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -82,6 +83,9 @@ TARGET_BOOTLOADER_BOARD_NAME := shamu_t
 TARGET_NO_RPC := true
 
 TARGET_BOARD_INFO_FILE := device/moto/shamu_t/board-info.txt
+
+# Properties
+TARGET_SYSTEM_PROP += device/moto/shamu_t/system.prop
 
 TARGET_USES_ION := true
 TARGET_HW_DISK_ENCRYPTION := false
