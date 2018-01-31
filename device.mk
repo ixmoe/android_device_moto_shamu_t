@@ -189,8 +189,8 @@ PRODUCT_PACKAGES += \
 
 # CMActions
 PRODUCT_PACKAGES += \
-    libjni_CMActions \
-    CMActions
+    libjni_LineageActions \
+    LineageActions
     
 PRODUCT_PACKAGES += \
     keystore.msm8084
