@@ -14,4 +14,4 @@
 # limitations under the License.
 #
 
-add_lunch_combo aosp_shamu_t-userdebug
+add_lunch_combo nitrogen_shamu_t-userdebug

@@ -29,6 +29,8 @@ TARGET_NO_BOOTLOADER := true
 TARGET_KERNEL_CONFIG := shamu_t_defconfig
 TARGET_KERNEL_SOURCE := kernel/moto/shamu_t
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
+KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-4.8/bin
 
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE :=  2048
@@ -131,10 +133,5 @@ EXTENDED_FONT_FOOTPRINT := true
 
 # Disable dex-preopt of prebuilts to save space.
 DONT_DEXPREOPT_PREBUILTS := true
-
-# CMHW
-BOARD_USES_CYANOGEN_HARDWARE := true
-BOARD_HARDWARE_CLASS := \
-    hardware/cyanogen/cmhw
 
 -include vendor/motorola/shamu_t/BoardConfigVendor.mk
