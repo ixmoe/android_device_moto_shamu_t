@@ -1,5 +1,10 @@
 [
   {
+    "repository": "ixmoe/android_kernel_moto_shamu_t",
+    "target_path": "kernel/moto/shamu_t",
+    "branch": "lineage-15.1"
+  },
+  {
     "repository": "android_packages_resources_devicesettings",
     "target_path": "packages/resources/devicesettings"
   }
