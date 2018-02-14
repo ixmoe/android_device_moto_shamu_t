@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2015 The CyanogenMod Project
- * Copyright (c) 2018 The LineageOS Project
+ * Copyright (c) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,13 +31,11 @@ import android.util.Log;
 public class SensorHelper {
     private static final String TAG = "LineageActions";
 
-    private static final int SENSOR_TYPE_MMI_FLAT_UP           = 65537;
-    private static final int SENSOR_TYPE_MMI_FLAT_DOWN         = 65538;
-    private static final int SENSOR_TYPE_MMI_STOW              = 65539;
     private static final int SENSOR_TYPE_MMI_CAMERA_ACTIVATION = 65540;
-    private static final int SENSOR_TYPE_MMI_IR_GESTURE        = 65541;
-    private static final int SENSOR_TYPE_MMI_IR_OBJECT         = 65543;
-    private static final int SENSOR_TYPE_MMI_CHOP_CHOP         = 65546;
+    private static final int SENSOR_TYPE_MMI_CHOP_CHOP = 65546;
+    private static final int SENSOR_TYPE_MMI_FLAT_UP = 65537;
+    private static final int SENSOR_TYPE_MMI_FLAT_DOWN = 65538;
+    private static final int SENSOR_TYPE_MMI_STOW = 65539;
 
     private static final int BATCH_LATENCY_IN_MS = 100;
 
@@ -82,13 +80,9 @@ public class SensorHelper {
         return mSensorManager.getDefaultSensor(SENSOR_TYPE_MMI_FLAT_DOWN, true);
     }
 
-    public Sensor getIrGestureSensor() {
-        return mSensorManager.getDefaultSensor(SENSOR_TYPE_MMI_IR_GESTURE, true);
-    }
-
     public Sensor getProximitySensor() {
         return mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY, true);
-     }
+    }
 
     public Sensor getStowSensor() {
         return mSensorManager.getDefaultSensor(SENSOR_TYPE_MMI_STOW, true);

@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2015 The CyanogenMod Project
- * Copyright (c) 2018 The LineageOS Project
+ * Copyright (c) 2015-2016 The CyanogenMod Project
+ * Copyright (c) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,31 +26,26 @@ import android.hardware.SensorManager;
 import android.util.Log;
 
 import org.lineageos.settings.device.LineageActionsSettings;
-import org.lineageos.settings.device.SensorAction;
 import org.lineageos.settings.device.SensorHelper;
 
 public class ChopChopSensor implements SensorEventListener, UpdatedStateNotifier {
     private static final String TAG = "LineageActions-ChopChopSensor";
-    private static final int DELAY_BETWEEN_CHOP_CHOP_IN_MS = 1500;
+
+    private static final int TURN_SCREEN_ON_WAKE_LOCK_MS = 500;
 
     private final LineageActionsSettings mLineageActionsSettings;
-    private final SensorAction mAction;
     private final SensorHelper mSensorHelper;
     private final Sensor mSensor;
     private final Sensor mProx;
-    private long mLastAction;
 
     private boolean mIsEnabled;
     private boolean mProxIsCovered;
 
-    public ChopChopSensor(LineageActionsSettings lineageActionsSettings, SensorAction action,
-        SensorHelper sensorHelper) {
+    public ChopChopSensor(LineageActionsSettings lineageActionsSettings, SensorHelper sensorHelper) {
         mLineageActionsSettings = lineageActionsSettings;
-        mAction = action;
         mSensorHelper = sensorHelper;
         mSensor = sensorHelper.getChopChopSensor();
         mProx = sensorHelper.getProximitySensor();
-        mLastAction = System.currentTimeMillis();
     }
 
     @Override
@@ -70,18 +65,12 @@ public class ChopChopSensor implements SensorEventListener, UpdatedStateNotifier
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        Log.d(TAG, "chop chop triggered");
         if (mProxIsCovered) {
             Log.d(TAG, "proximity sensor covered, ignoring chop-chop");
             return;
         }
-        long now = System.currentTimeMillis();
-        if (now - mLastAction > DELAY_BETWEEN_CHOP_CHOP_IN_MS) {
-            Log.d(TAG, "Allowing chop chop");
-            mLastAction = now;
-            mAction.action();
-        } else {
-            Log.d(TAG, "Denying chop chop");
-        }
+        mLineageActionsSettings.chopChopAction();
     }
 
     @Override
@@ -98,4 +87,5 @@ public class ChopChopSensor implements SensorEventListener, UpdatedStateNotifier
         public void onAccuracyChanged(Sensor mSensor, int accuracy) {
         }
     };
+
 }

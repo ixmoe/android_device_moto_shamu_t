@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2015 The CyanogenMod Project
- * Copyright (c) 2018 The LineageOS Project
+ * Copyright (c) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import org.lineageos.settings.device.actions.CameraActivationSensor;
 import org.lineageos.settings.device.actions.ChopChopSensor;
 import org.lineageos.settings.device.actions.FlipToMute;
 import org.lineageos.settings.device.actions.LiftToSilence;
+import org.lineageos.settings.device.actions.ProximitySilencer;
 import org.lineageos.settings.device.actions.UpdatedStateNotifier;
 
 import org.lineageos.settings.device.doze.DozePulseAction;
@@ -40,14 +41,6 @@ import org.lineageos.settings.device.doze.ScreenReceiver;
 import org.lineageos.settings.device.doze.ScreenStateNotifier;
 import org.lineageos.settings.device.doze.StowSensor;
 
-import org.lineageos.settings.device.SensorAction;
-import org.lineageos.settings.device.SensorHelper;
-import org.lineageos.settings.device.IrGestureManager;
-import org.lineageos.settings.device.IrGestureSensor;
-import org.lineageos.settings.device.IrSilencer;
-import org.lineageos.settings.device.UserAwareDisplay;
-import org.lineageos.settings.device.LineageActionsSettings;
-
 public class LineageActionsService extends IntentService implements ScreenStateNotifier,
         UpdatedStateNotifier {
     private static final String TAG = "LineageActions";
@@ -55,7 +48,6 @@ public class LineageActionsService extends IntentService implements ScreenStateN
     private final Context mContext;
 
     private final DozePulseAction mDozePulseAction;
-    private final IrGestureManager mIrGestureManager;
     private final PowerManager mPowerManager;
     private final PowerManager.WakeLock mWakeLock;
     private final ScreenReceiver mScreenReceiver;
@@ -74,26 +66,20 @@ public class LineageActionsService extends IntentService implements ScreenStateN
         LineageActionsSettings lineageActionsSettings = new LineageActionsSettings(context, this);
         mSensorHelper = new SensorHelper(context);
         mScreenReceiver = new ScreenReceiver(context, this);
-        mIrGestureManager = new IrGestureManager();
 
         mDozePulseAction = new DozePulseAction(context);
         mScreenStateNotifiers.add(mDozePulseAction);
 
         // Actionable sensors get screen on/off notifications
         mScreenStateNotifiers.add(new FlatUpSensor(lineageActionsSettings, mSensorHelper, mDozePulseAction));
-        mScreenStateNotifiers.add(new IrGestureSensor(lineageActionsSettings, mSensorHelper, mDozePulseAction, mIrGestureManager));
+        mScreenStateNotifiers.add(new ProximitySensor(lineageActionsSettings, mSensorHelper, mDozePulseAction));
         mScreenStateNotifiers.add(new StowSensor(lineageActionsSettings, mSensorHelper, mDozePulseAction));
-        mScreenStateNotifiers.add(new UserAwareDisplay(lineageActionsSettings, mSensorHelper, mIrGestureManager, context));
 
         // Other actions that are always enabled
-
-        SensorAction cameraAction = lineageActionsSettings.newCameraActivationAction();
-        SensorAction chopChopAction = lineageActionsSettings.newChopChopAction();
-
-        mUpdatedStateNotifiers.add(new CameraActivationSensor(lineageActionsSettings, cameraAction, mSensorHelper));
-        mUpdatedStateNotifiers.add(new ChopChopSensor(lineageActionsSettings, chopChopAction, mSensorHelper));
-        mUpdatedStateNotifiers.add(new IrSilencer(lineageActionsSettings, context, mSensorHelper,
-                mIrGestureManager));
+        mUpdatedStateNotifiers.add(new CameraActivationSensor(lineageActionsSettings, mSensorHelper));
+        mUpdatedStateNotifiers.add(new ChopChopSensor(lineageActionsSettings, mSensorHelper));
+        
+        mUpdatedStateNotifiers.add(new ProximitySilencer(lineageActionsSettings, context, mSensorHelper));
         mUpdatedStateNotifiers.add(new FlipToMute(lineageActionsSettings, context, mSensorHelper));
         mUpdatedStateNotifiers.add(new LiftToSilence(lineageActionsSettings, context, mSensorHelper));
 
@@ -108,9 +94,9 @@ public class LineageActionsService extends IntentService implements ScreenStateN
 
     @Override
     public void screenTurnedOn() {
-        if (!mWakeLock.isHeld()) {
-            mWakeLock.acquire();
-        }
+            if (!mWakeLock.isHeld()) {
+                mWakeLock.acquire();
+            }
         for (ScreenStateNotifier screenStateNotifier : mScreenStateNotifiers) {
             screenStateNotifier.screenTurnedOn();
         }
@@ -118,9 +104,9 @@ public class LineageActionsService extends IntentService implements ScreenStateN
 
     @Override
     public void screenTurnedOff() {
-        if (mWakeLock.isHeld()) {
-            mWakeLock.release();
-        }
+            if (mWakeLock.isHeld()) {
+                mWakeLock.release();
+            }
         for (ScreenStateNotifier screenStateNotifier : mScreenStateNotifiers) {
             screenStateNotifier.screenTurnedOff();
         }

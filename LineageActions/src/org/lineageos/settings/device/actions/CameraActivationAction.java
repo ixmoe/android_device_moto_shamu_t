@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2015 The CyanogenMod Project
- * Copyright (c) 2018 The LineageOS Project
+ * Copyright (c) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import org.lineageos.settings.device.SensorAction;
-import org.lineageos.settings.device.LineageActionsSettings;
 
 public class CameraActivationAction implements SensorAction {
     private static final String TAG = "LineageActions";
@@ -44,14 +43,12 @@ public class CameraActivationAction implements SensorAction {
     private final KeyguardManager mKeyguardManager;
     private final PackageManager mPackageManager;
     private final PowerManager mPowerManager;
-    private final int mVibratorPeriod;
 
-    public CameraActivationAction(Context context, int vibratorPeriod) {
+    public CameraActivationAction(Context context) {
         mContext = context;
         mKeyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         mPackageManager = context.getPackageManager();
-        mVibratorPeriod = vibratorPeriod;
     }
 
     @Override
@@ -67,7 +64,7 @@ public class CameraActivationAction implements SensorAction {
 
     private void vibrate() {
         Vibrator v = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-        v.vibrate(mVibratorPeriod);
+        v.vibrate(500);
     }
 
     private void turnScreenOn() {

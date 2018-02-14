@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2015 The CyanogenMod Project
+ * Copyright (c) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +26,6 @@ import android.hardware.SensorManager;
 import android.util.Log;
 
 import org.lineageos.settings.device.LineageActionsSettings;
-import org.lineageos.settings.device.SensorAction;
 import org.lineageos.settings.device.SensorHelper;
 
 public class CameraActivationSensor implements SensorEventListener, UpdatedStateNotifier {
@@ -34,36 +34,26 @@ public class CameraActivationSensor implements SensorEventListener, UpdatedState
     private static final int TURN_SCREEN_ON_WAKE_LOCK_MS = 500;
 
     private final LineageActionsSettings mLineageActionsSettings;
-    private final SensorAction mAction;
     private final SensorHelper mSensorHelper;
 
     private final Sensor mSensor;
-    private final Sensor mProx;
 
     private boolean mIsEnabled;
-    private boolean mProxIsCovered;
 
-    public CameraActivationSensor(LineageActionsSettings lineageActionsSettings, SensorAction action,
-        SensorHelper sensorHelper) {
+    public CameraActivationSensor(LineageActionsSettings lineageActionsSettings, SensorHelper sensorHelper) {
         mLineageActionsSettings = lineageActionsSettings;
-        mAction = action;
         mSensorHelper = sensorHelper;
-
         mSensor = sensorHelper.getCameraActivationSensor();
-        mProx = sensorHelper.getProximitySensor();
+        mSensorHelper.registerListener(mSensor, this);
     }
 
     @Override
     public synchronized void updateState() {
         if (mLineageActionsSettings.isCameraGestureEnabled() && !mIsEnabled) {
             Log.d(TAG, "Enabling");
-            mSensorHelper.registerListener(mSensor, this);
-            mSensorHelper.registerListener(mProx, mProxListener);
             mIsEnabled = true;
         } else if (! mLineageActionsSettings.isCameraGestureEnabled() && mIsEnabled) {
             Log.d(TAG, "Disabling");
-            mSensorHelper.unregisterListener(this);
-            mSensorHelper.unregisterListener(mProxListener);
             mIsEnabled = false;
         }
     }
@@ -71,25 +61,10 @@ public class CameraActivationSensor implements SensorEventListener, UpdatedState
     @Override
     public void onSensorChanged(SensorEvent event) {
         Log.d(TAG, "activate camera");
-        if (mProxIsCovered) {
-            Log.d(TAG, "proximity sensor covered, ignoring activate camera");
-            return;
-        }
-        mAction.action();
+        if (mIsEnabled) mLineageActionsSettings.cameraAction();
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
-
-    private SensorEventListener mProxListener = new SensorEventListener() {
-        @Override
-        public synchronized void onSensorChanged(SensorEvent event) {
-            mProxIsCovered = event.values[0] < mProx.getMaximumRange();
-        }
-
-        @Override
-        public void onAccuracyChanged(Sensor mSensor, int accuracy) {
-        }
-    };
 }

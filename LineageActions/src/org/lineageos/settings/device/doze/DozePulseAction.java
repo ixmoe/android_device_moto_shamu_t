@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2015 The CyanogenMod Project
- * Copyright (c) 2018 The LineageOS Project
+ * Copyright (c) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,13 +25,12 @@ import org.lineageos.settings.device.SensorAction;
 
 public class DozePulseAction implements SensorAction, ScreenStateNotifier {
     private static final String TAG = "LineageActions";
-    private static boolean sCanDoze = true;
-    private static final int DELAY_BEFORE_FIRST_DOZE_IN_MS = 3000;
-    private static final int DELAY_BETWEEN_DOZES_IN_MS = 10000;
+
+    private static final int DELAY_BETWEEN_DOZES_IN_MS = 1500;
+
     private final Context mContext;
 
     private long mLastDoze;
-    private long mLastScreenOff;
 
     public DozePulseAction(Context context) {
         mContext = context;
@@ -43,7 +42,7 @@ public class DozePulseAction implements SensorAction, ScreenStateNotifier {
 
     @Override
     public void screenTurnedOff() {
-        mLastScreenOff = System.currentTimeMillis();
+        mLastDoze = System.currentTimeMillis();
     }
 
     public void action() {
@@ -53,30 +52,15 @@ public class DozePulseAction implements SensorAction, ScreenStateNotifier {
         }
     }
 
-    public static boolean getCanDoze() {
-        return sCanDoze;
-    }
-
-    public static void setCanDoze(boolean canDoze) {
-        sCanDoze = canDoze;
-    }
-
     public synchronized boolean mayDoze() {
-        if (!sCanDoze) {
-            Log.d(TAG, "Denying doze (stowed)");
-            return false;
-        }
-
         long now = System.currentTimeMillis();
-        if ((now - mLastScreenOff) < DELAY_BEFORE_FIRST_DOZE_IN_MS) {
-            Log.d(TAG, "Denying doze due to DELAY_BEFORE_FIRST_DOZE_IN_MS");
-            return false;
-        } else if ((now - mLastDoze) < DELAY_BETWEEN_DOZES_IN_MS) {
-            Log.d(TAG, "Denying doze due to DELAY_BETWEEN_DOZES");
+        if (now - mLastDoze > DELAY_BETWEEN_DOZES_IN_MS) {
+            Log.d(TAG, "Allowing doze");
+            mLastDoze = now;
+            return true;
+        } else {
+            Log.d(TAG, "Denying doze");
             return false;
         }
-        Log.d(TAG, "Allowing doze");
-        mLastDoze = now;
-        return true;
     }
 }
