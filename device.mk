@@ -280,10 +280,22 @@ PRODUCT_OEM_PROPERTIES := \
 PRODUCT_COPY_FILES += \
     device/moto/shamu_t/qcril.db:system/etc/ril/qcril.db
 
+# Treble packages
+$(call inherit-product, device/moto/shamu_t/treble.mk)
+
+# Properties going into default.prop
+
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
 
-# Treble packages
-$(call inherit-product, device/moto/shamu_t/treble.mk)
+# Camera configuration
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    camera.disable_zsl_mode=0 \
+    persist.camera.HAL3.enabled=1 \
+    persist.camera.ois.disable=0
+
+# Perf
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+   ro.qualcomm.perf.cores_online=2
 
