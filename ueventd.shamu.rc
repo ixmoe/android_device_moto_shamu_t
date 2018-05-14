@@ -63,7 +63,7 @@
 /dev/msm_rotator          0660   system     system
 /dev/hw_random            0600   root       root
 /dev/adsprpc-smd          0660   media      camera
-/dev/ttyHS99              0660   bluetooth  bluetooth
+/dev/ttyHS0               0660   bluetooth  bluetooth
 /sys/devices/virtual/smdpkt/smdcntl*       open_timeout   0664 radio radio
 /dev/sdio_tty_ciq_00      0660   system     system
 /dev/tty_sdio_00          0660   system     system
