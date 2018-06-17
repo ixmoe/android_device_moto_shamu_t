@@ -1,5 +1,5 @@
 # Copyright (C) 2016 The CyanogenMod Project
-# Copyright (C) 2017 The LineageOS Project
+# Copyright (C) 2018 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,8 +27,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 # Inherit from hardware-specific part of the product configuration
 $(call inherit-product, device/moto/shamu_t/device.mk)
 $(call inherit-product-if-exists, vendor/motorola/shamu_t/shamu-vendor.mk)
-
-DEVICE_PACKAGE_OVERLAYS += device/moto/shamu_t/overlay-lineage
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_NAME := lineage_shamu_t
